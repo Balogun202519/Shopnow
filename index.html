@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopNow — Modern Store</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-inner">
+        <a href="#" class="logo" onclick="showPage('home')">ShopNow</a>
+        <nav class="nav">
+          <a href="#" onclick="showPage('home')">Home</a>
+          <a href="#" onclick="showPage('products')">Shop</a>
+          <a href="#" onclick="showPage('about')">About</a>
+        </nav>
+        <div class="header-actions">
+          <div class="search-bar">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search products…"
+              oninput="filterProducts()"
+            />
+            <span class="search-icon">⌕</span>
+          </div>
+          <button class="cart-btn" onclick="toggleCart()">
+            🛒 Cart <span class="cart-count" id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="homePage" class="page active">
+      <section class="hero">
+        <div class="hero-content">
+          <span class="hero-eyebrow">New Collection</span>
+          <h1 class="hero-title">Shop What<br /><em>Moves You</em></h1>
+          <p class="hero-sub">
+            Curated picks, updated daily. Find your next favourite thing.
+          </p>
+          <button class="btn-primary" onclick="showPage('products')">
+            Browse All Products
+          </button>
+        </div>
+        <div class="hero-image-slot">
+          <!-- Place hero.jpg inside the /images/ folder -->
+          <img
+            src="images/hero1.jpg"
+            alt="Hero banner"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'flex';
+            "
+          />
+          <div class="placeholder-hero">
+            <span>📷</span>
+            <p>Add <code>hero.jpg</code> to <code>/images/</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="featured">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid" id="featuredGrid"></div>
+      </section>
+
+      <section class="banner-strip">
+        <div class="banner-item">🚚 Free shipping over $50</div>
+        <div class="banner-item">🔄 30-day returns</div>
+        <div class="banner-item">🔒 Secure checkout</div>
+        <div class="banner-item">💬 24/7 support</div>
+      </section>
+    </div>
+
+    <!-- PRODUCTS PAGE -->
+    <div id="productsPage" class="page">
+      <section class="products-section">
+        <div class="products-header">
+          <h2 class="section-title">All Products</h2>
+          <div class="filter-bar">
+            <select id="categoryFilter" onchange="filterProducts()">
+              <option value="all">All Categories</option>
+              <option value="electronics">Electronics</option>
+              <option value="clothing">Clothing</option>
+              <option value="accessories">Accessories</option>
+              <option value="home">Home</option>
+            </select>
+            <select id="sortFilter" onchange="filterProducts()">
+              <option value="default">Sort: Default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="name">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="products-grid" id="allProductsGrid"></div>
+      </section>
+    </div>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div id="detailPage" class="page">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <div class="product-detail" id="productDetail"></div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="aboutPage" class="page">
+      <section class="about-section">
+        <h2 class="section-title">About ShopNow</h2>
+        <p>
+          We're a modern store delivering quality products straight to your
+          door. Our team handpicks every item for design, durability, and value.
+        </p>
+        <div class="about-grid">
+          <div class="about-card">
+            🌍 <strong>Worldwide Shipping</strong>
+            <p>We deliver to 80+ countries.</p>
+          </div>
+          <div class="about-card">
+            ♻️ <strong>Sustainable</strong>
+            <p>Eco-conscious packaging on every order.</p>
+          </div>
+          <div class="about-card">
+            🤝 <strong>Trusted</strong>
+            <p>Over 50,000 happy customers.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button onclick="toggleCart()" class="close-btn">✕</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <p class="empty-cart">Your cart is empty.</p>
+      </div>
+      <div class="cart-footer" id="cartFooter" style="display: none">
+        <div class="cart-total">
+          Total: <strong id="cartTotal">$0.00</strong>
+        </div>
+        <button class="btn-primary" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <footer class="footer">
+      <p>© 2025 ShopNow · All rights reserved</p>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
